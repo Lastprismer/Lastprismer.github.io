@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>harness – 极简深潜</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05_rl_adaptation.html" rel="next">
+<link href="./03_tools.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-10a17ad04981d1636a2872b537ff0b59.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="极简深潜">
+<meta property="og:description" content="DeepSeek V4 Pro 极简模式、社区插件与 Harness 工具路由调查">
+<meta property="og:image" content="https://lastprismer.github.io/blog/deepseek-v4-pro/images/蓝色大肥鱼_呆(贴纸)_3_2026-08-18-14-10-39.gif">
+<meta property="og:site_name" content="极简深潜">
+<meta name="twitter:title" content="极简深潜">
+<meta name="twitter:description" content="DeepSeek V4 Pro 极简模式、社区插件与 Harness 工具路由调查">
+<meta name="twitter:image" content="https://lastprismer.github.io/blog/deepseek-v4-pro/images/蓝色大肥鱼_呆(贴纸)_3_2026-08-18-14-10-39.gif">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lastprismer.github.io/blog/deepseek-v4-pro/04_harness.html">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">极简深潜</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">开场</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./01_results.html"> 
+<span class="menu-text">成绩</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./02_language.html"> 
+<span class="menu-text">语言</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./03_tools.html"> 
+<span class="menu-text">工具</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./04_harness.html"> 
+<span class="menu-text">Harness</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./05_rl_adaptation.html"> 
+<span class="menu-text">RL 适配</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./06_summary.html"> 
+<span class="menu-text">结尾</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./i_in_the_folds_of_time.html"> 
+<span class="menu-text">？？？</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/Lastprismer/deepseek-v4-pro-harness-analysis/blob/main/paper/deepseek-v4-pro-harness-analysis.pdf"> 
+<span class="menu-text">PDF 长文</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./../"> 
+<span class="menu-text">← 返回个人博客</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="切换阅读器模式">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_harness.html">04 · 深渊凝视着大肥鱼</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="sidebar-tools-main">
+    <div id="quarto-search" class="quarto-navigation-tool px-1" title="搜索"></div>
+</div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00 · 从这里开始</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01 · 我测了 25 亿 token</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_language.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02 · 我也会数 We</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03 · 极简模式与独眼大肥鱼</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_harness.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">04 · 深渊凝视着大肥鱼</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_rl_adaptation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05 · 扑腾的傻鱼</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">06 · 结尾</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./i_in_the_folds_of_time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">？？？</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#当大肥鱼凝视-sre-的时候它看到了什么" id="toc-当大肥鱼凝视-sre-的时候它看到了什么" class="nav-link active" data-scroll-target="#当大肥鱼凝视-sre-的时候它看到了什么">当大肥鱼凝视 SRE 的时候，它看到了什么</a>
+  <ul class="collapse">
+  <li><a href="#v4-pro-没有好好学会-sre-的用法" id="toc-v4-pro-没有好好学会-sre-的用法" class="nav-link" data-scroll-target="#v4-pro-没有好好学会-sre-的用法">V4 Pro 没有好好学会 SRE 的用法</a>
+  <ul class="collapse">
+  <li><a href="#invalid-arguments" id="toc-invalid-arguments" class="nav-link" data-scroll-target="#invalid-arguments">Invalid Arguments</a></li>
+  <li><a href="#fs_not_observed" id="toc-fs_not_observed" class="nav-link" data-scroll-target="#fs_not_observed"><code>FS_NOT_OBSERVED</code></a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="当大肥鱼凝视-sre-的时候它看到了什么" class="level1">
+<h1>当大肥鱼凝视 SRE 的时候，它看到了什么</h1>
+<p><big><big><strong>本章结论：dsh 极简模式与 V4 Pro 自身的策略存在摩擦</strong></big></big></p>
+<p>这部分主体在 <a href="https://github.com/Lastprismer/deepseek-v4-pro-harness-analysis/blob/main/paper/deepseek-v4-pro-harness-analysis.pdf">PDF 长文</a>里，此处仅简略说明；证据、详细分析，让读了 PDF 的 AI 来讲解吧</p>
+<section id="v4-pro-没有好好学会-sre-的用法" class="level2">
+<h2 class="anchored" data-anchor-id="v4-pro-没有好好学会-sre-的用法">V4 Pro 没有好好学会 SRE 的用法</h2>
+<section id="invalid-arguments" class="level3">
+<h3 class="anchored" data-anchor-id="invalid-arguments">Invalid Arguments</h3>
+<p>SRE 中有的参数是可选的。</p>
+<p>比如：<code>view</code> 的时候，<code>new_str</code>，<code>old_str</code> 等实际上不用给出。</p>
+<p><strong>但是 V4 Pro 会主动把它们写成 <code>null</code></strong>：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace_editor</span>({</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"command"</span><span class="op">:</span> <span class="st">"str_replace"</span><span class="op">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"path"</span><span class="op">:</span> <span class="st">"/app/input.tex"</span><span class="op">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"old_str"</span><span class="op">:</span> <span class="st">"in a reserved way"</span><span class="op">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"new_str"</span><span class="op">:</span> <span class="st">"in a quiet way"</span><span class="op">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"file_text"</span><span class="op">:</span> <span class="dt">null</span><span class="op">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"insert_line"</span><span class="op">:</span> <span class="dt">null</span><span class="op">,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"view_range"</span><span class="op">:</span> <span class="dt">null</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<p>会产生：</p>
+<pre><code>=&gt; INVALID_ARGS: Error: invalid arguments:
+   "file_text" must be a string;
+   "insert_line" must be an integer;
+   "view_range" must be an array</code></pre>
+<p>dsh 解析 <strong>可选输入</strong> 时，只有一种期望的输入：</p>
+<blockquote class="blockquote">
+<p>不填写这个输入</p>
+</blockquote>
+<p>例如，上面的错误调用，能被 dsh 解析且不报错的写法是：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode ts code-with-copy"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace_editor</span>({</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"command"</span><span class="op">:</span> <span class="st">"str_replace"</span><span class="op">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"path"</span><span class="op">:</span> <span class="st">"/app/input.tex"</span><span class="op">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"old_str"</span><span class="op">:</span> <span class="st">"in a reserved way"</span><span class="op">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"new_str"</span><span class="op">:</span> <span class="st">"in a quiet way"</span><span class="op">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<p>主实验里，有 6 条轨迹调用过 <code>SRE</code>，模型在其中的 5 条里都额外提交了 <code>null</code>。</p>
+<p><code>Invalid Arguments</code> 一共发生 6 次；有一个轨迹里，模型已经知道不能写 <code>null</code> 了，又犯了错。</p>
+<p>从 JSON Schema 语义看，DeepSeek Harness 拒绝 <code>null</code> 并不违规：<strong>optional 与 nullable 是两回事</strong>。</p>
+<p>问题在产品组合层面，V4 Pro 偶尔进入官方提供的 <code>SRE</code> 路径时，会反复生成这套官方 Harness 不接受的参数形状。</p>
+<blockquote class="blockquote">
+<p><strong>官方模型反复生成显式的 <code>null</code>，官方 Harness 又严格拒绝</strong>；两者单独都可以声称符合自己的协议，但组合起来持续制造了无效调用。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</blockquote>
+<p>何意味，傻鱼……</p>
+<hr>
+</section>
+<section id="fs_not_observed" class="level3">
+<h3 class="anchored" data-anchor-id="fs_not_observed"><code>FS_NOT_OBSERVED</code></h3>
+<p><code>SRE</code> 要求模型先用 <code>sre("command" = "view", ...)</code> 登记目标文件的观察状态，再用 <code>sre("command" = "str_replace", ...)</code> 进行修改。</p>
+<p><strong>dsh 不认可 <code>bash</code> 先读、再用 <code>SRE</code> 修改的操作</strong></p>
+<p>dsh 的 <code>SRE</code> 实际上有两层保护：</p>
+<ol type="1">
+<li><code>old_str</code> 必须要在文件里 <strong><em>唯一匹配</em></strong> <span class="math inline">\rightarrow</span> 模型必须给出正确的原文，才能修改</li>
+<li><strong>不跨 SRE / bash</strong> 的读写检测：必须先用 <code>SRE</code> 读过，才能用 <code>SRE</code> 写。</li>
+</ol>
+<p>这不是唯一可行的设计。它提供版本新鲜度保护，但在持久 <code>bash</code> 与 <code>SRE</code> 并列的双工具配置里，也会把模型已经读过的文件判定为“未读”，制造一次额外的跨工具摩擦。</p>
+<p>较为合理的如 Claude Code 的 <code>SRE</code> 类似物（v2.1.208 起）：允许模型通过 <code>bash grep / cat</code> 等其他工具先简单的读原文（限单文件、无管道的查看命令），再用 <code>SRE</code> 修改。</p>
+<p>GLM-5.3 也在这里崴了脚，出现了好几次用 <code>bash</code> 读 + <code>SRE</code> 编辑后被报错退回的情况。不过综合来看，V4 Pro 的犯错率依旧出类拔萃：</p>
+<p>【Linux 样本中，已经发生的 <code>SRE</code> 请求内的拒绝比例】</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>模型与数据</th>
+<th style="text-align: right;">SRE 请求</th>
+<th style="text-align: right;">显式 <code>null</code> 拒绝</th>
+<th style="text-align: right;"><code>FS_NOT_OBSERVED</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>V4 Pro</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;"><strong>9（28.13%）</strong></td>
+<td style="text-align: right;"><strong>4（12.50%）</strong></td>
+</tr>
+<tr class="even">
+<td>GLM-5.3</td>
+<td style="text-align: right;">594</td>
+<td style="text-align: right;">0（0.00%）</td>
+<td style="text-align: right;">6（1.01%）</td>
+</tr>
+</tbody>
+</table>
+<p>虽然 V4 Pro 的 <code>SRE</code> 调用次数少的惊人，但是 <code>SRE</code> 调用失败的次数也高的惊人啊……</p>
+<hr>
+<p><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br></p>
+<p>彩蛋：</p>
+<p>关于 dsh 参考过的 Pi Agent，Pi 中没有“先读后写”检测，Pi 的 <code>edit</code> 工具靠的就是 <code>old_str</code> 的匹配。匹配的上，那就完成修改。</p>
+<p>这也合理，模型既然能填对 <code>old_str</code>，那可以相信模型知道自己在改什么。</p>
+<p>DSH 把 Pi 式唯一文本匹配与独立的观察版本约束叠加到一起，得到了一条比两者都更严格的修改路径；</p>
+<p>这种额外保护有工程收益，也增加了 <code>bash</code> 与 <code>SRE</code> 并列时的跨工具成本。</p>
+<p>在时间夹缝之中，<code>SRE</code> 起初没有计划与 <code>bash</code> 绑在一起</p>
+<p>……那也怪不得 V4 Pro 不喜欢用 <code>SRE</code> 了……</p>
+<p><img src="images/蓝色大肥鱼_呆(贴纸)_3_2026-08-18-14-10-39.gif" class="img-fluid"></p>
+<hr>
+<p>彩蛋2：</p>
+<p>主实验所用的 dsh 不允许可选参数写成 <code>null</code>，那么它的其他校验一定很严格吧……</p>
+<p><strong>no！</strong></p>
+<p>如果模型请求：</p>
+<pre><code>str_replace_editor({
+  "command": "str_replace",
+  "path": "/app/input.tex",
+  "old_str": "in a reserved way",
+  "new_str": "in a quiet way",
+  "i_want_to_eat_big_white_rice": "dying to"
+})</code></pre>
+<p>多出来的这个 <code>i_want_to_eat_big_white_rice</code>，dsh 会如何处理呢？</p>
+<p><strong><em>执行期丢弃！</em></strong></p>
+<p>模型不会收到报错，“幻觉出来的新参数名”反而畅通无阻；</p>
+<p>大白饭会顺利 <em>通过校验</em> 、到达执行层，然后被工具体静默忽略。</p>
+<p>于是模型就能吃得很香了。</p>
+<p>当然，Claude Code 也是这么干的，所以无所谓</p>
+<hr>
+<p>彩蛋3：</p>
+<p><strong>【实现对照】</strong></p>
+<blockquote class="blockquote">
+<p>这里不能简单说 DeepSeek Harness 违反了 JSON Schema：optional 不等于 nullable。<br> 在主实验所用的 SRE schema 中，这些字段可以省略，但一旦显式出现，就必须具有对应的非空类型，因此 DSH 拒绝 null 是其参数规范的正常结果。<br> 问题在于，这并不是同谱系编辑器唯一采用的兼容策略。<br> Anthropic 的 <code>str_replace_based_edit_tool</code> 参考实现将多项跨命令参数接收为可空值； 执行 <code>str_replace</code> 时，与当前命令无关的空字段不会在统一入口处触发拒绝，<code>new_str=None</code> 还会被解释为空字符串。<br> 换言之，V4 Pro 生成的这种参数形状在 DSH 中不合法，却可以被另一种编辑器运行时接受。<br> 严格校验本身可以合理，但“官方模型 + 官方 RL 适配 Harness”的组合仍未消化这处协议差异，最终把它变成了一次无效工具调用。<br></p>
+</blockquote>
+<p>—— 这不是在替大肥鱼开脱。恰恰相反：</p>
+<p>如果极简模式只是一个普通第三方 Harness，这可以解释为跨 Harness 迁移失败；</p>
+<p>但当它被公开称为与 V4 Pro 的 RL 训练条件适配时，同一失配就需要额外解释。</p>
+
+
+</section>
+</section>
+</section>
+
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> 回到顶部</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">脚注</h2>
+
+<ol>
+<li id="fn1"><p><strong>版本注（2026-08-28）：</strong> DeepSeek Harness 在 <a href="https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.2-alpha.1"><code>dsh-v0.1.2-alpha.1</code></a> 中修复了这里展示的参数形状：当前命令没有使用的字段若填入 <code>null</code>，会被当作未传入；官方测试也直接覆盖了 <code>str_replace</code> 携带 <code>file_text: null</code>、<code>insert_line: null</code> 与 <code>view_range: null</code> 后成功执行的情形。修复没有把所有可选参数都改成可空参数：<code>str_replace</code> 真正使用的 <code>new_str</code> 若填 <code>null</code> 仍会报错，删除匹配文本仍须省略该字段。参见<a href="https://github.com/deepseek-ai/deepseek-harness/commit/5c98d5ece86ef60999c661e57be5bfbd616fb4ea">修复提交</a>与<a href="https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/fs/tool-str-replace-editor/src/index.ts#L443-L468">发行版源码</a>。本页统计的是此前版本已经产生的历史轨迹；新版本修复不会改变这些观测。截至核查时，alpha.1 是 GitHub 预发布版本，npm 的 <code>latest</code> 与 <code>next</code> 标签仍指向 <code>0.1.1-rc.2</code>。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/lastprismer\.github\.io\/blog\/deepseek-v4-pro");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03_tools.html" class="pagination-link" aria-label="03 · 极简模式与独眼大肥鱼">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">03 · 极简模式与独眼大肥鱼</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05_rl_adaptation.html" class="pagination-link" aria-label="05 · 扑腾的傻鱼">
+        <span class="nav-page-text">05 · 扑腾的傻鱼</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="./../">
+<p>← 返回个人博客</p>
+</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://creativecommons.org/licenses/by/4.0/">
+<p>原创文字 CC BY 4.0；图片与第三方材料除外</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/Lastprismer/deepseek-v4-pro-harness-analysis/blob/main/paper/deepseek-v4-pro-harness-analysis.pdf">
+<p>技术报告（PDF）</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

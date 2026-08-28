@@ -1,0 +1,162 @@
+:root {
+  --kaoyu-ink: #20242a;
+  --kaoyu-muted: #69717d;
+  --kaoyu-rule: #e5e8ec;
+  --kaoyu-purple: #9832cf;
+  --kaoyu-cyan: #206f85;
+  --kaoyu-soft: #f6f7f9;
+}
+
+body {
+  color: var(--kaoyu-ink);
+  font-family: "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+
+.navbar {
+  background: #20242a !important;
+  border-bottom: 1px solid #303640;
+}
+
+.navbar-title,
+.navbar-nav .nav-link {
+  font-weight: 650;
+}
+
+#quarto-content main.content {
+  max-width: 880px;
+}
+
+h1,
+h2,
+h3 {
+  color: #171a1f;
+  font-weight: 780;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  margin-bottom: 1.4rem;
+  font-size: clamp(2rem, 4.5vw, 3.15rem);
+  line-height: 1.18;
+}
+
+h2 {
+  margin-top: 3.2rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--kaoyu-rule);
+  font-size: 1.65rem;
+}
+
+h3 {
+  margin-top: 2.2rem;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+strong {
+  color: #15181c;
+  font-weight: 760;
+}
+
+a {
+  color: var(--kaoyu-cyan);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+}
+
+blockquote {
+  margin: 1.6rem 0;
+  padding: 0.35rem 1.15rem;
+  color: #3d4651;
+  border-left: 4px solid var(--kaoyu-purple);
+  background: #faf8fc;
+}
+
+code:not(.sourceCode) {
+  padding: 0.13em 0.35em;
+  color: #56236f;
+  background: #f4eef7;
+  border-radius: 0.25rem;
+}
+
+table {
+  margin: 1.6rem auto;
+  font-size: 0.96rem;
+}
+
+thead {
+  background: var(--kaoyu-soft);
+}
+
+th,
+td {
+  padding: 0.58rem 0.8rem !important;
+  vertical-align: middle;
+}
+
+main img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.75rem auto;
+  border-radius: 0.35rem;
+}
+
+main img.article-banner {
+  width: 100%;
+  margin: 1.25rem auto 0.45rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 12px 32px rgba(31, 35, 40, 0.10);
+}
+
+.image-credit {
+  margin: 0 0 2.5rem;
+  color: var(--kaoyu-muted);
+  font-size: 0.78rem;
+  text-align: right;
+}
+
+main img[src$=".gif"] {
+  max-width: min(100%, 560px);
+}
+
+hr {
+  margin: 3.5rem 0;
+  border: 0;
+  border-top: 1px solid var(--kaoyu-rule);
+  opacity: 1;
+}
+
+.sidebar nav[role="doc-toc"] ul > li > a.active,
+.sidebar-item-container .active {
+  color: var(--kaoyu-purple) !important;
+  font-weight: 700;
+}
+
+.page-navigation {
+  margin-top: 4rem;
+}
+
+.nav-page .nav-page-text {
+  font-weight: 650;
+}
+
+@media (max-width: 991.98px) {
+  body {
+    font-size: 1rem;
+    line-height: 1.82;
+  }
+
+  h1 {
+    font-size: 2.15rem;
+  }
+
+  #quarto-content main.content {
+    max-width: none;
+  }
+}

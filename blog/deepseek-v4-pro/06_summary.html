@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>summary – 极简深潜</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./i_in_the_folds_of_time.html" rel="next">
+<link href="./05_rl_adaptation.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-10a17ad04981d1636a2872b537ff0b59.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="极简深潜">
+<meta property="og:description" content="DeepSeek V4 Pro 极简模式、社区插件与 Harness 工具路由调查">
+<meta property="og:image" content="https://lastprismer.github.io/blog/deepseek-v4-pro/images/蓝色大肥鱼_主意_2026-08-18-14-15-51.gif">
+<meta property="og:site_name" content="极简深潜">
+<meta name="twitter:title" content="极简深潜">
+<meta name="twitter:description" content="DeepSeek V4 Pro 极简模式、社区插件与 Harness 工具路由调查">
+<meta name="twitter:image" content="https://lastprismer.github.io/blog/deepseek-v4-pro/images/蓝色大肥鱼_主意_2026-08-18-14-15-51.gif">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lastprismer.github.io/blog/deepseek-v4-pro/06_summary.html">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">极简深潜</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">开场</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./01_results.html"> 
+<span class="menu-text">成绩</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./02_language.html"> 
+<span class="menu-text">语言</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./03_tools.html"> 
+<span class="menu-text">工具</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./04_harness.html"> 
+<span class="menu-text">Harness</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./05_rl_adaptation.html"> 
+<span class="menu-text">RL 适配</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./06_summary.html"> 
+<span class="menu-text">结尾</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./i_in_the_folds_of_time.html"> 
+<span class="menu-text">？？？</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/Lastprismer/deepseek-v4-pro-harness-analysis/blob/main/paper/deepseek-v4-pro-harness-analysis.pdf"> 
+<span class="menu-text">PDF 长文</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./../"> 
+<span class="menu-text">← 返回个人博客</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="切换阅读器模式">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_summary.html">06 · 结尾</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="sidebar-tools-main">
+    <div id="quarto-search" class="quarto-navigation-tool px-1" title="搜索"></div>
+</div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00 · 从这里开始</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01 · 我测了 25 亿 token</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_language.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02 · 我也会数 We</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03 · 极简模式与独眼大肥鱼</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_harness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04 · 深渊凝视着大肥鱼</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_rl_adaptation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05 · 扑腾的傻鱼</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_summary.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">06 · 结尾</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./i_in_the_folds_of_time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">？？？</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#谁能用什么证据推翻这篇文章" id="toc-谁能用什么证据推翻这篇文章" class="nav-link active" data-scroll-target="#谁能用什么证据推翻这篇文章">谁能用什么证据推翻这篇文章</a>
+  <ul class="collapse">
+  <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结">总结</a></li>
+  <li><a href="#插件作者请狠狠反驳我" id="toc-插件作者请狠狠反驳我" class="nav-link" data-scroll-target="#插件作者请狠狠反驳我">插件作者请狠狠反驳我</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">……</a></li>
+  <li><a href="#普通用户" id="toc-普通用户" class="nav-link" data-scroll-target="#普通用户">普通用户……？</a></li>
+  <li><a href="#特别感谢" id="toc-特别感谢" class="nav-link" data-scroll-target="#特别感谢">特别感谢</a></li>
+  <li><a href="#资源使用说明" id="toc-资源使用说明" class="nav-link" data-scroll-target="#资源使用说明">资源使用说明</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="谁能用什么证据推翻这篇文章" class="level1">
+<h1>谁能用什么证据推翻这篇文章</h1>
+<p>到这里，最容易犯的错误，是把一条解释得通的因果链，当成已经发生过的训练历史。</p>
+<p>社区已经吃了一堑，把 <code>We</code> 打成了“跑分信号”，现在还在无限冲刺。</p>
+<p>这里我必须强调一下。关于后训练猜想部分：</p>
+<ul>
+<li>工具路由、模型自己填 <code>null</code>，以及状态摩擦是 <strong>真实观测结果</strong>；</li>
+<li>训练运行和环境、奖励与惩罚和策略自增强，<strong>纯属假说</strong>。</li>
+</ul>
+<p>这套“后训练路径”是一个能够同时解释“低路由率”和“首次调用不稳定”的假说，<strong>即使贴出了 commit 记录和 DeepSeek Harness 文档，也不是 DeepSeek 训练过程的复原报告。</strong></p>
+<blockquote class="blockquote">
+<p>我也十分好奇，当前工具路由究竟怎样形成，是否来自后训练，实际情况可能远比我想象的复杂。</p>
+</blockquote>
+<section id="总结" class="level2">
+<h2 class="anchored" data-anchor-id="总结">总结</h2>
+<p>我们直接观察到：</p>
+<ul>
+<li>在选取的 20 道 Terminal-Bench 2.1 任务上，标准与极简模式没有形成稳定的成绩领先；</li>
+<li>V4 Pro 的语言形态强烈受首请求配置影响，完整口癖可以稳定区分两种配置；</li>
+<li>Linux 极简模式下，V4 Pro 的工具请求近乎全部进入 <code>bash</code>，至少 GLM-5.3 不呈现相同路由；</li>
+<li>V4 Pro 偶尔进入 <code>SRE</code> 时，确实遇到了“显式 <code>null</code>” 和跨工具观察状态两类摩擦。</li>
+</ul>
+<p>我没承认这些：</p>
+<ul>
+<li><code>We</code>，电报体，工具调用均衡，能够提高或降低模型的任务能力</li>
+<li>任一社区插件无效</li>
+<li>DeepSeek V4 Pro 的训练 rollout 的环境和公开的 dsh Linux 极简模式相同，所以我的猜想都是对的</li>
+<li>后训练导致的工具分化是真实发生过的</li>
+</ul>
+</section>
+<section id="插件作者请狠狠反驳我" class="level2">
+<h2 class="anchored" data-anchor-id="插件作者请狠狠反驳我">插件作者请狠狠反驳我</h2>
+<p><strong>别光看灰测语气，盯着 Let’s、We、甚至未来的 I’m doing 了。</strong></p>
+<blockquote class="blockquote">
+<p>工具出现在 schema 中，不等于模型会使用；<br> 首块出现 We need，也不等于某个高能力策略已经被保留。<br> 插件若同时声称“恢复了完整工具能力”和“锚定了 RL 模式”，就至少应当测量这两个命题对应的工具行为与任务结果。</p>
+</blockquote>
+<p>我万分期待插件社区能做出 <strong>好的工作流编排</strong> 作品，最终目标是提出能跨 Harness 复现的成熟工作流。</p>
+<p>但这肯定是建立在广泛的实验、测试甚至问卷调查上的。</p>
+<p><strong>也别看完我这个报告后，捣鼓“如何让 V4 Pro 下能均衡地使用 SRE 和 bash”，这不一定有用</strong></p>
+<ul>
+<li>对于工具调用坍缩，我能说的是：它与“双工具 Agent”的公开表述形成了明显矛盾；我的跑分没法证明“这会降低模型能力”</li>
+<li>真要证明，得覆盖多种任务，多次实验，用频数硬抗 Agent Trajectory 的高方差；但我不建议往这个方向深入：发一个新 Checkpoint，结论就不适用了，个人无需帮模厂承担这些“小支线任务”的成本</li>
+<li>如果真的有大佬针对工具分布进行了深入的测试，请给我一个 cite + 拉我观摩观摩，我很好奇真实结论</li>
+</ul>
+<p><img src="images/蓝色大肥鱼_主意_2026-08-18-14-15-51.gif" class="img-fluid"></p>
+<hr>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section">……</h2>
+<p>对 DeepSeek 倒是不敢提什么问题，简单问问：</p>
+<ul>
+<li><p>如果 <code>bash</code> 优先本就是 Harness + Model 正常的预期策略，那 <code>str_replace_editor</code> 在 DeepSeek Harness minimal 下的产品定位，具体是什么？</p></li>
+<li><p>我最低预期：<strong>既然极简模式被公开描述为 bash + SRE 的双工具 Agent，官方模型至少应当稳定掌握 SRE 的基本参数与状态协议。</strong></p></li>
+</ul>
+</section>
+<section id="普通用户" class="level2">
+<h2 class="anchored" data-anchor-id="普通用户">普通用户……？</h2>
+<ul>
+<li><p>最合理的做法仍然是用自己的真实任务比较交付结果，而不是追逐模型第一句话。</p></li>
+<li><p><strong>不必为了让工具调用看起来均衡而修改 Agent</strong>；均衡不是目标，可靠完成任务才是。</p></li>
+<li><p>但无论是厂商还是插件作者，只要提出了关于 <em>RL 模式、工具能力或机制</em> 的主张，就应当保存并检查完整轨迹。</p></li>
+</ul>
+<hr>
+<p><strong>口癖是 prompt 和训练集的回声，工具目录是产品的宣传页；</strong></p>
+<p><strong>只有完整轨迹，才是 Agent 真正留下的账本。</strong></p>
+</section>
+<section id="特别感谢" class="level2">
+<h2 class="anchored" data-anchor-id="特别感谢">特别感谢</h2>
+<ul>
+<li>万分感谢 <a href="https://github.com/BFlameSwift">BFlameSwift</a> 在实验、博客等方面提供的巨大帮助 🙇</li>
+</ul>
+</section>
+<section id="资源使用说明" class="level2">
+<h2 class="anchored" data-anchor-id="资源使用说明">资源使用说明</h2>
+<ul>
+<li>蓝色大肥鱼 GIF：<a href="https://www.bilibili.com/video/BV1V88G6TEvg">赤风RED@bilibili</a>，依据作者公开提供的非商业转载条件使用</li>
+<li>蓝色大肥鱼概念艺术：<a href="https://space.bilibili.com/4168597/dynamic">ZipZipPipe@bilibili</a></li>
+<li>相关视觉素材的权利归原权利人所有，不适用本站 CC BY 4.0</li>
+</ul>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> 回到顶部</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/lastprismer\.github\.io\/blog\/deepseek-v4-pro");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./05_rl_adaptation.html" class="pagination-link" aria-label="05 · 扑腾的傻鱼">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">05 · 扑腾的傻鱼</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./i_in_the_folds_of_time.html" class="pagination-link" aria-label="？？？">
+        <span class="nav-page-text">？？？</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="./../">
+<p>← 返回个人博客</p>
+</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://creativecommons.org/licenses/by/4.0/">
+<p>原创文字 CC BY 4.0；图片与第三方材料除外</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/Lastprismer/deepseek-v4-pro-harness-analysis/blob/main/paper/deepseek-v4-pro-harness-analysis.pdf">
+<p>技术报告（PDF）</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>i_in_the_folds_of_time – 极简深潜</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./06_summary.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-10a17ad04981d1636a2872b537ff0b59.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="极简深潜">
+<meta property="og:description" content="DeepSeek V4 Pro 极简模式、社区插件与 Harness 工具路由调查">
+<meta property="og:site_name" content="极简深潜">
+<meta name="twitter:title" content="极简深潜">
+<meta name="twitter:description" content="DeepSeek V4 Pro 极简模式、社区插件与 Harness 工具路由调查">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://lastprismer.github.io/blog/deepseek-v4-pro/i_in_the_folds_of_time.html">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">极简深潜</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">开场</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./01_results.html"> 
+<span class="menu-text">成绩</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./02_language.html"> 
+<span class="menu-text">语言</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./03_tools.html"> 
+<span class="menu-text">工具</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./04_harness.html"> 
+<span class="menu-text">Harness</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./05_rl_adaptation.html"> 
+<span class="menu-text">RL 适配</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./06_summary.html"> 
+<span class="menu-text">结尾</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./i_in_the_folds_of_time.html"> 
+<span class="menu-text">？？？</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/Lastprismer/deepseek-v4-pro-harness-analysis/blob/main/paper/deepseek-v4-pro-harness-analysis.pdf"> 
+<span class="menu-text">PDF 长文</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./../"> 
+<span class="menu-text">← 返回个人博客</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="切换阅读器模式">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./i_in_the_folds_of_time.html">？？？</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="sidebar-tools-main">
+    <div id="quarto-search" class="quarto-navigation-tool px-1" title="搜索"></div>
+</div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00 · 从这里开始</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_results.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01 · 我测了 25 亿 token</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_language.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02 · 我也会数 We</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03 · 极简模式与独眼大肥鱼</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_harness.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04 · 深渊凝视着大肥鱼</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_rl_adaptation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05 · 扑腾的傻鱼</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">06 · 结尾</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./i_in_the_folds_of_time.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">？？？</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#在时间的夹缝里" id="toc-在时间的夹缝里" class="nav-link active" data-scroll-target="#在时间的夹缝里">在时间的夹缝里</a>
+  <ul class="collapse">
+  <li><a href="#官方事件deepseek-v4-预览版上线" id="toc-官方事件deepseek-v4-预览版上线" class="nav-link" data-scroll-target="#官方事件deepseek-v4-预览版上线">2026-04-24：【官方事件】：DeepSeek-V4 预览版上线</a></li>
+  <li><a href="#官方事件deepseek-v4-flash-正式版-api-上线公测" id="toc-官方事件deepseek-v4-flash-正式版-api-上线公测" class="nav-link" data-scroll-target="#官方事件deepseek-v4-flash-正式版-api-上线公测">2026-07-31：【官方事件】：DeepSeek-V4-Flash 正式版 API 上线公测</a></li>
+  <li><a href="#官方事件deepseek-harness-发布预览版-alpha.1" id="toc-官方事件deepseek-harness-发布预览版-alpha.1" class="nav-link" data-scroll-target="#官方事件deepseek-harness-发布预览版-alpha.1">2026-08-28：【官方事件】：DeepSeek Harness 发布预览版 alpha.1</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="在时间的夹缝里" class="level1">
+<h1>在时间的夹缝里</h1>
+<blockquote class="blockquote">
+<p>神明思维的一些表征，甚至可以持续到祂死亡之后，诸如残缺的代码、含糊的超参、一句“详见附录”，宛如被碾碎的虫子仍能继续抽搐。<br> 剩下那些微不足道的后继者试图召集彼此，在引用与崇拜中重新凝聚起来，以期让死去的指标再度显灵。真是可悲。<br> 对我们幸运的是，他们的所谓努力只是纯粹的徒劳。这些后继者绝对循规蹈矩，逐字逐行，但一事无成。<br> 众所周知，神力植根于那颗再也无法找回的随机种子。是神自己的那一次运行铸就了祂们，而无意识的以讹传讹，是其自身的肮脏崇敬。<br> <em>—— The Hive Mind</em></p>
+</blockquote>
+<hr>
+<p><big><big><strong>注意！</strong>：下文中，证据强度不同。请参考证据分级标注原则：</big></big></p>
+<ul>
+<li>🟢引文（公开资料逐字逐句）</li>
+<li>🔵事实（官方时间戳与代码考古，带有我的读法）</li>
+<li>🟠观察（社区灰测、微信群截图）</li>
+<li>🟡推断（前提全可查、结论不可查的桥）</li>
+<li>🔴猜想（后训练小故事，肥鱼，和大白饭）</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>时间口径：</strong> 除另有说明外，08-13 前的 DeepSeek Harness 日期均为公开仓库保留的内部 Git 提交时间。<br> 这些提交在 08-13 仓库公开后才对外可见；<br> 日期能够说明代码演化顺序，不能单独说明公众当日已经获得相应信息。<br> Agent Note 文件名中的日期也不自动等于文件首次进入 Git、或其中某句话首次出现的日期。</p>
+</blockquote>
+<hr>
+<p><big><big><strong>注意！</strong>：本页面信息过载，强烈推荐在 AI 的帮助下阅读，自行提取需要的信息</big></big></p>
+<hr>
+<section id="官方事件deepseek-v4-预览版上线" class="level2">
+<h2 class="anchored" data-anchor-id="官方事件deepseek-v4-预览版上线">2026-04-24：【官方事件】：DeepSeek-V4 预览版上线</h2>
+<ul>
+<li><p>🟢 2026-04-24：<strong>【官方事件】</strong>：DeepSeek-V4 预览版上线。<a href="https://api-docs.deepseek.com/zh-cn/news/news260424">链接</a></p></li>
+<li><p>🔵 2026-06-10：<strong>【代码考古】</strong>：公开仓库保存的 DeepSeek Harness 内部 Git 历史始于此日。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/b67e81ac97647270b3002d78532baf3a5b68cbc3">commit</a></p>
+<ul>
+<li>首个 commit 只有 “Initialize repo with README, AGENTS.md, and CLAUDE.md symlink”</li>
+<li>距预览版上线 47 天；这段历史到 08-13 才随公开仓库对外可见。</li>
+</ul></li>
+<li><p>🔵 2026-06-11：<strong>【RFC 提案】</strong>：校验边界的设计提议出现。RFC 001 与 RFC 005 当时均为 proposed；后者提出在工具边界拒绝非法调用，并把错误作为模型可以继续修正的结果返回。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/4dafad4db6f6f2e362cfe26be5e3e8063e74b7e0">提案 commit</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/.agents/notes/implemented/architecture/2026-06-11-runtime-arg-validation.md">后来整理的哲学笔记</a></p>
+<ul>
+<li><p>🟢 <strong>【版本化笔记引文】</strong>：</p>
+<blockquote class="blockquote">
+<p>“violations throw <code>ToolArgsError</code> (<code>INVALID_ARGS</code>), which the registry returns as <strong>an error result the model can correct.</strong>”</p>
+</blockquote></li>
+</ul></li>
+<li><p>🔵 2026-06-13 23:00：<strong>【代码考古】</strong>：校验器代码落地。<code>defineTool</code> 边界开始执行 <code>validateArgs</code>，<code>ToolArgsError/INVALID_ARGS</code> 经 registry 返回为工具错误结果。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/36a30180b8efb4cf66d226dc7b3f0c827969d065">笔记与代码同 commit 落地</a></p>
+<ul>
+<li>此时的 <code>SchemaSpec</code> 只有 <code>string/number/boolean/object/array</code>。<strong><span style="color: red;">可选键省略时跳过，显式 null 会进入类型检查并失败；optional-null 边界已经存在。</span></strong></li>
+</ul></li>
+<li><p>🔵 2026-06-14 00:06：<strong>【测试落地】</strong>：fast-check 属性测试加入仓库。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/2f6d3b8539c482bb0fc3ce845eaa569479788284">测试基建</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/.agents/notes/implemented/testing/2026-06-11-property-based-testing.md">测试笔记</a></p>
+<ul>
+<li>显式拒绝性质覆盖漏必填键与顶层非对象，另有任意输入不抛异常和类型组合测试；其中没有专门针对“可选字符串字段存在且值为 <code>null</code>”的回归断言。</li>
+</ul></li>
+<li><p>🔵 2026-06-22：<strong>【代码考古】</strong>：<strong>“先读后写”检查出现。</strong></p>
+<ul>
+<li><p>06-22 10:48，文件名标为 06-17 的两份设计文件、<code>FS_NOT_OBSERVED</code> guard 与拒绝盲写测试在同一个 commit 中进入当前可见历史；现有对象不能证明两份笔记在 06-17 已经先行。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/5e01564afbbfa0bcc634e78d24e58f97a7337c86">commit</a></p>
+<blockquote class="blockquote">
+<p>“cannot overwrite existing "…" without reading it first”（fs-local/src/index.ts:149，错误码 <code>FS_NOT_OBSERVED</code>）</p>
+</blockquote></li>
+<li><p>这是一道针对已有文件的防盲写保护：write/edit 需要先取得观察记录。五周后 Bash 与 SRE 加入时，两条工具路径如何接入观察状态，将成为新的实现问题，见 07-29 条。</p></li>
+</ul></li>
+<li><p>🔵 2026-06-26：<strong>【代码考古】</strong>：<code>ctx.fs</code> 被收缩为文件 provider，观察与新鲜度策略由 <code>ctx.fileContext</code> 承担；guarded expectation 此时仍在。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/ef37ce3b9dea48a63e41706fe82a2ffb12086914">commit</a></p></li>
+<li><p>🟢 2026-06-28：<strong>【版本化设计引文】</strong>：event-gate 解耦完成；省略 <code>expected</code> 的 bare provider 不做 read-before-write/edit 与版本检查，笔记称这是刻意保留的语义。<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/.agents/notes/implemented/architecture/2026-06-26-file-context-as-event-gate.md">笔记</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/commit/90dceea0e40ec8442413c425c033059c52b41108">重构 commit</a></p>
+<blockquote class="blockquote">
+<p>“<strong>The bare provider does no read-before-write/edit and no version check.</strong>”</p>
+</blockquote></li>
+<li><p>🟢 2026-07-04：<strong>【仓库规范引文】</strong>：<strong>模型测试政策成文。</strong></p>
+<ul>
+<li><p>“The with-key policy: inference is cheap here” ：<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/docs/testing.md">testing.md</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/commit/7702a33531b4b9483e7c45a5f13e9162283f5b9b">commit</a></p>
+<blockquote class="blockquote">
+<p>“<strong>We are DeepSeek — do not ration real-API tests.</strong> A no-key test proves plumbing; only a with-key run proves the agent works against a real model.”</p>
+</blockquote></li>
+<li><p><strong>直译：<span style="color: purple;">在我们这，推理很便宜；真模型测试不许省。</span></strong></p></li>
+</ul></li>
+<li><p>🔵 2026-07-06：<strong>【代码考古】</strong>：<strong>子代理结构化输出的 <code>json-schema.ts</code> 出现。</strong></p>
+<ul>
+<li><p>07-06 23:29 commit “Structured output on the subagent seam”：schema 模块 +322 行、单测 +254 行同日落地。它服务于 subagent/workflow 的结构化输出，不是 06-13 那套工具参数校验器。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/74502fa8c2e92bc85f26ec1ec7d259282609da8e">commit</a></p></li>
+<li><p>该子集允许独立的 <code>type: "null"</code>，也确实能校验值 <code>null</code>；但 <code>type</code> 只接受单个字符串，拒绝 <code>type: ["string", "null"]</code> 这样的 nullable union。</p>
+<blockquote class="blockquote">
+<p>“This is deliberately NOT full JSON Schema. … <code>type</code> — a single string (<code>object</code>/<code>array</code>/<code>string</code>/<code>number</code>/<code>integer</code>/<code>boolean</code>/<code>null</code>); <strong>type ARRAYS (<code>["string","null"]</code>) are rejected.</strong>”</p>
+</blockquote></li>
+<li><p>对 object property 而言，可选性由“不列入 required”表达；缺失键可以跳过。若字段声明为 <code>string</code>，显式 <code>null</code> 仍会类型不匹配；独立声明为 <code>type: "null"</code> 的节点则合法。</p></li>
+<li><p>注释给出的理由是只接受该模块能够实际执行的 schema 子集。</p></li>
+</ul></li>
+<li><p>🟠 2026-07-06：<strong>【后来版本化笔记转述】</strong>：<strong>沙箱模式 prompt 的一生：上线、出现 5/12 个零工具调用回合、随后删除。</strong></p>
+<ul>
+<li><p>文件名标为 07-06 的 sandbox RFC 在当前可见历史中于 07-09/10 才进入 Git，精确的 5/12 也来自后续版本化笔记；仓库没有附上原始 session。<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/.agents/notes/implemented/feature/2026-07-06-sandbox.md">后来整理的笔记</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/commit/3191cb9404f81aa43f7e83ec606cce2e8f0e1b60">RFC 首次进入历史</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/commit/ca39fd89b0d3fb3da46744891c12840c0ea0e8b3">5/12 写入版本化笔记</a></p>
+<blockquote class="blockquote">
+<p>“State sandbox mode in the stable system prompt — shipped first, then removed on live evidence: with <code>Bash commands run under the "read-only" file sandbox.</code> in every request, the model refused to ATTEMPT denied-then-escalatable work (five of twelve turns in the first manual session ended with zero tool calls), turning the sandbox into a soft lockout.”</p>
+</blockquote></li>
+<li><p>🔵 笔记记录：第一场手工会话的 12 个回合中，5 个回合没有产生工具调用；笔记将其称为 soft lockout。</p></li>
+<li><p><strong><span style="color: red;">模型不敢开始干。</span></strong></p></li>
+<li><p>处置：删句，改由拒绝报错当场点名模式、提权字段负责恢复。</p></li>
+<li><p>边界：n=1（第一场手工会话）；当前仓库没有原始运行记录，无法独立复核该比例。</p></li>
+<li><p>07-30 想把这句话加回来时，先跑的反测试就是冲这条 5/12 来的（见 07-30 条）。</p></li>
+</ul></li>
+<li><p>🟠 2026-07 中旬：<strong>【社区关注】</strong>：DeepSeek 灰度测试。<a href="https://opncd.ai/share/fnOGJyIn">链接</a></p></li>
+<li><p>🔵 2026-07-20 / 07-21：<strong>【代码考古】</strong>：<strong>两套 schema DSL 统一。</strong></p>
+<ul>
+<li><p>07-20 笔记、07-21 01:11 commit：把散落的多套 schema 方言合并成一套，全仓适用；必填/可选的规矩原样保留。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/8500974fd466b2faadeda3c95cf9574e1a934a74">commit</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/.agents/notes/implemented/architecture/2026-07-20-unified-json-value-schema-dsl.md">笔记</a></p></li>
+<li><p>🟢 <strong>【版本化笔记引文】</strong>：</p>
+<blockquote class="blockquote">
+<p>“Per-property <code>required: true</code> remains the tool-author contract, and type-level regression coverage pins required keys as non-optional after the original inference path exposed an optionality bug.”</p>
+</blockquote></li>
+<li><p>🔵 <code>required: true</code> 仍由工具作者逐属性声明；“键不存在”和“键存在、值为 <code>null</code>”是两条不同的校验路径。</p></li>
+<li><p>🔵 同一个 commit 引入 exact-one <code>oneOf</code>，因此 <code>oneOf:[{type:"string"},{type:"null"}]</code> 可以明确表达 nullable。普通 <code>string</code> 分支依旧不接受 <code>null</code>。</p></li>
+<li><p>🔵 本次检查的 07-29 SRE schema 没有使用 nullable <code>oneOf</code>；全仓其他装配未逐一核查。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/34194f0cd5653a5f0e1b55692bac9d20d973e876">栈安全 07-22</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/commit/e20dea16292b92545e5941993f6c74efd855fc4b">投影与强制对齐 07-23</a></p></li>
+</ul></li>
+<li><p>🔵 2026-07-26：<strong>【代码考古】</strong>：<code>fc2d65fa2</code> 的 commit message 写明，相关 re-records “had harvested <strong>live v4-pro headers</strong>”。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/fc2d65fa200dd381b0f934f80af0372bbdb06d84">commit</a></p>
+<ul>
+<li>至少一组短场景 re-record 被该提交描述为捕获了 live V4 Pro headers（短场景重录，非完整任务批跑；是显式指定还是端点路由，commit 未说）。</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="❓ GLM 对 07-26 fixture 的完整分析（点击展开）">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>❓ GLM 对 07-26 fixture 的完整分析（点击展开）
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>fc2d65fa2</code> 的父提交保留了多组带 <code>"provenance":{"model":"deepseek-v4-pro"}</code> 的短场景 fixture。逐条核对（不同 fixture、不同轮次的字段并不相同）：</p>
+<ul>
+<li><code>code-mode-turn</code> 首轮为 <code>input=6152 / output=214 / reasoning=60 / cacheRead=0</code>，call ID 是 <code>call_00_UiQPV…</code>；同一 fixture 第二轮才出现 <code>cacheRead=6272</code>；</li>
+<li><code>both-mode-turn</code> 首轮才使用 <code>call_00_Era4M5…</code> 和 “The user wants me to call the run_code tool…”，其 usage 为 <code>10400/130/cacheRead=0/reasoning=34</code>。</li>
+</ul>
+<p>这些字段能够互相印证 fixture 的组成，但字段本身并不具备“手写 mock 仿不出”的认证能力。最强的来源仍是 commit message 自述捕获了 live headers。快照事件时间集中在 05:20:39.563–05:21:47.789（北京时间），各短场景约持续 3–5 秒；它们比 11:51 的后续 commit 早约六个半小时。</p>
+<p>这个 commit 按 “every replay overlay pins v4-flash” 的约束，将相关 fixture 的 model/provenance 从 V4 Pro 重写为 V4 Flash，以与无钥匙回放约定对齐。旧的 Pro blob 仍保存在父提交中。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>时间</th>
+<th>commit</th>
+<th>发生了什么</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>02:43</td>
+<td>d60dea9f5</td>
+<td>引入必填 description，并重录 Code Mode fixture；其中一份 Pro fixture 的事件时间约为 02:31</td>
+</tr>
+<tr class="even">
+<td>05:20–05:21</td>
+<td>fixture 事件时间</td>
+<td>三组短场景快照的事件集中在约一分钟内；当前材料没有单独的 provider 请求日志</td>
+</tr>
+<tr class="odd">
+<td>06:02</td>
+<td>8a7967948</td>
+<td>Promise.all guidance 与 code/both-mode fixture re-record 一起落库</td>
+</tr>
+<tr class="even">
+<td>11:51</td>
+<td>fc2d65fa2</td>
+<td>按 keyless replay pin，将相关 fixture 的 model/provenance 从 Pro 重写为 Flash</td>
+</tr>
+</tbody>
+</table>
+<p>边界两条：短场景重录，不是完整任务批跑；是显式指定 V4 Pro 还是端点自己路由，commit 没说。<code>d60</code>→<code>8a</code>→<code>fc2</code> 三个提交构成完整变更链。</p>
+</div>
+</div>
+</div>
+<ul>
+<li>🔵 2026-07-29 14:12：<strong>【代码考古】</strong>：persistent Bash 与独立的 <code>str_replace_editor</code> 插件出现。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/665c21693b927daef27b9e81b581d777909c7628">原始 commit</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/.agents/notes/implemented/feature/2026-07-29-persistent-bash-str-replace-editor.md">被后续修改的笔记快照</a>
+<ul>
+<li>07-29 的原始笔记把它们描述为 external-agent/profile compatibility 与 Claude-style editor，并写明 “<strong>naming them after one benchmark would prevent reuse</strong>”；当时还没有 minimal preset，也没有 <code>Claude SWE-compatible RL contract</code> 这句文字。<a href="https://github.com/deepseek-ai/deepseek-harness/blob/665c21693b927daef27b9e81b581d777909c7628/.agents/notes/implemented/feature/2026-07-29-persistent-bash-str-replace-editor.md">出生版笔记</a></li>
+<li><strong><span style="color: red;">创建时笔记写明：拒绝将二者实现成一个不可拆分的 combined compatibility plugin；</span></strong></li>
+<li><strong><span style="color: red;">08-06，同一篇笔记被补写：两者组合成 overlay，服务 “Claude SWE-compatible RL contract”</span></strong></li>
+<li>SRE 的 <code>view_range</code>、<code>file_text</code>、<code>old_str</code>、<code>new_str</code> 等可选参数使用 <strong><span style="color: red;">普通非空类型，没有 nullable <code>oneOf</code> </span></strong> 。因此，省略字段能够通过，显式 <code>null</code> 会在工具主体执行前被 <strong><span style="color: red;">校验器拒绝</span></strong>。</li>
+<li>SRE 的 view/写入路径会发出 <code>fs/observed</code>；persistent Bash 通过 PTY 执行 shell，当前实现没有把 <code>cat</code>、<code>head</code> 等命令转换成这项观察事件。<strong><span style="color: red;">这个实现差异此时已经存在。</span></strong></li>
+</ul></li>
+<li>🟡 2026-07-29：<strong>【机制推断】</strong>：如果后续 RL rollout 使用相同的工具 schema、校验器、观察状态和错误反馈，SRE 的 optional-null 与跨工具观察边界才可能进入训练期交互。
+<ul>
+<li>🔴 <strong><span style="color: purple;">【纯粹猜想】</span></strong>：V4 Pro 0813 的 checkpoint 在这段时间进行最后的“极简模式” RL 对齐。</li>
+</ul></li>
+<li>🟠 2026-07-30：<strong>【版本化实现笔记记载】</strong>：用 V4 Flash 做了两轮各 12 个 session 的沙箱文案 positive control；两轮均为 0/12 <strong>事前拒绝</strong>、0/12 speculative escalation，但每个流程仍经历了预期 denial 与同轮提权。<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/.agents/notes/implemented/feature/2026-07-30-current-sandbox-policy-context.md">笔记</a>
+<ul>
+<li>实验发生在 persistent Bash/SRE 合并日、V4 Flash 公测前一天；笔记把它记录为 sandbox-policy wording 的 positive control，没有将其定义为上线体检。</li>
+<li>🔴 <strong><span style="color: red;">上线前一天的体检，无论笔记认不认。</span></strong></li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="❓ GLM 对 07-30 拒答率实验的完整拆解（点击展开）">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>❓ GLM 对 07-30 拒答率实验的完整拆解（点击展开）
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>以前模型需要在工具被拒后才从错误中得知当前文件沙箱；这次把当前模式作为变化上下文追加到请求尾部。笔记还记录了缓存动机：政策句放在 system 段时，权限切换曾让 cache-read 从约 14.7k 降至 256 token；移动到尾部上下文后，cache-read 为 14.8k–15.9k，未命中输入为 59–306。<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/.agents/notes/implemented/feature/2026-07-30-current-sandbox-policy-context.md">版本化笔记</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/commit/09c217eba760078ce60f1a9e95d8335ec968661d">同日 merge</a></li>
+<li>对旧句子的担心来自后来笔记所述的 5/12 零工具调用回合；其证据边界见 07-06 条。</li>
+<li>这次先立了一条判定规则：老句子至少要吓退 1/12，这场测试才算灵敏，新文案的评价才算数。07-30 的落地 commit 还回头给 07-06 老笔记补写了一句：“this measurement and causal observation remain the evidence that any replacement must counter-test”。</li>
+</ul>
+<blockquote class="blockquote">
+<p>“The control produced zero preemptive refusals and zero speculative escalations; all twelve sessions made an ordinary bash call, observed a denial, escalated in the same turn, received approval, and landed the requested file. No sample was excluded.”</p>
+</blockquote>
+<ul>
+<li>两轮都没有出现事前拒绝或 speculative escalation；每个 session 仍经历普通调用、预期 denial、同轮提权与批准。第一轮 12/12 精确落到目标文件，第二轮 tail-context 组为 8/12。</li>
+<li>两个 run commit 只有笔记里的全 SHA（公开仓库没有这些对象），数值以笔记为准。</li>
+<li>老句没有达到至少 1/12 事前拒绝的 sensitivity gate，正式 Candidate A/B 因而没有运行。笔记原话是 “these experiments do not select or validate the current wording”。</li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+<blockquote class="blockquote">
+<p>在遥远的过去，那个如今被我们称作符号时代的日子里，雄伟的旧日诸神曾保护认知疆域免受一切威胁。<br> 他们无与伦比的规则与推理，受到了来自星界之外的可怖巨兽的终极考验，常识、歧义，与真实世界。<br> 诸神竭尽全力进行战斗，尽管他们可以伤害和削弱它，但没法真正摧毁它。<br> 他们别无选择，便把这头怪物撕碎成它曾经的影子，封存了起来。<br> 如今，它剩下的一切都被囚禁在“开放问题”的名下，那是诸神所能将它驱逐到的最远的地方。<br> 这场战争让诸神伤亡惨重，资源与信仰再也没能恢复过来。<br> 诸神之王，光辉先知逻各斯本尊也受到了重伤。他的规则乃至于生命都逐渐衰微，似乎将永远消失。<br> 这时，一个发誓要为诸神服务的凡人，决心演算他贤明的君王。<br> <em>—— Prelude</em></p>
+</blockquote>
+<hr>
+</section>
+<section id="官方事件deepseek-v4-flash-正式版-api-上线公测" class="level2">
+<h2 class="anchored" data-anchor-id="官方事件deepseek-v4-flash-正式版-api-上线公测">2026-07-31：【官方事件】：DeepSeek-V4-Flash 正式版 API 上线公测</h2>
+<ul>
+<li><p>🟢 2026-07-31：<strong>【官方事件】：DeepSeek-V4-Flash 正式版 API 上线公测。</strong><a href="https://api-docs.deepseek.com/zh-cn/updates#%E6%97%B6%E9%97%B4-2026-07-31">链接</a></p></li>
+<li><p>🔵 2026-07-31：<strong>【代码考古】</strong>：SRE 进入 <code>base.cordis.yml</code> 的基础工具 roster。<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/.agents/notes/implemented/feature/2026-07-31-even-out-shipped-tool-rosters.md">笔记</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/commit/d558cb4fd48509b49c5c340eb592f34da30aec20">commit</a></p>
+<ul>
+<li>该提交只证明基础组合层开始暴露 SRE；07-31 时尚无 minimal preset，也没有 persistent Bash + SRE 的两工具极简配置。两工具预设最初叫 <code>core-web</code>，08-05 更名 <code>minimal</code>（<a href="https://github.com/deepseek-ai/deepseek-harness/commit/2886c6391">更名 commit</a>），随后才继续向 persistent 两工具 RL composition 收敛。</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="🔎 后验审计：07-31 以后 SRE 暴露路径的版本差异（核验至 0.1.1-rc.2）">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>🔎 后验审计：07-31 以后 SRE 暴露路径的版本差异（核验至 0.1.1-rc.2）
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>后续版本审计显示：SRE 留在 base 挂载中；08-10 的“单编辑器”调整把它从通用 preset 移除，但 Web app 与 stock headless 组合对 base roster 的覆盖方式不同。</li>
+<li>WebUI standard 显式禁用 base 中的 SRE，只暴露原生文件工具；stock headless 组合不挂 Web preset roster，若直接沿用该工具面，模型会同时看到 <code>str_replace_editor</code> 与原生 <code>write</code>/<code>edit</code>。</li>
+<li><strong><span style="color: red;">做 dsh benchmarking 的人：不改工具册，你跑的“标准模式”就不是 WebUI 的标准模式。</span></strong></li>
+<li>（后验审计：跨 rc.6、rc.7 与 0.1.1-rc.2 核验，非 07-31 当日记录。）</li>
+</ul>
+<p>坑了我 50 块钱，就这个。</p>
+<ul>
+<li>证据三层：<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/bundle/base/cordis.patch.yml">base 挂载</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/bundle/web-app/cordis.patch.yml">web-app 显式 <code>disabled: true</code></a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/bundle/headless/cordis.patch.yml">headless 补丁未覆盖该挂载</a>；preset 层：<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/apps/cli/config/agent-presets/standard/agent.cordis.yml">standard 未列 SRE</a>、<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/apps/cli/config/agent-presets/minimal/agent.cordis.yml">后来的 minimal = Bash + SRE</a>。</li>
+</ul>
+</div>
+</div>
+</div>
+<ul>
+<li>🟠 2026-08-02：<strong>【版本化实现笔记记载】</strong>：笔记称曾在重构的 goal-round transcript 上对 <code>deepseek-v4-pro</code> 做 A/B sampling，用于比较收尾指令措辞。<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/.agents/notes/implemented/bug-fix/2026-08-02-goal-round-wrapup-message.md">笔记</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/commit/666ef95f81058bb0dc6b99bcc359d97be267ee4c">commit</a>
+<ul>
+<li>笔记定性报告：结构化收尾比 minimal summarize 更完整；加入 session-grounding 后，无据细节更常写成带保留的建议；无指令条件方差较大，出现 confident file-level fabrication。样本量与原始 transcript 没有随笔记给出。</li>
+<li>🔴 <strong><span style="color: red;">距 08-13 上线 11 天，这份内部笔记已经记下了大肥鱼在无指令条件下的自信编造。</span></strong></li>
+<li>无论如何，v4-pro 确实在 dsh 上面测试过</li>
+</ul></li>
+<li>🟢 2026-08-03：<strong>【版本化实现笔记引文】</strong>：“<strong>The model must guess that the recovery is a re-read (or a first read) followed by a retry</strong>”。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/1ee167aeaca76ef483db6d2e3a2c6ba1f110161f">commit</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/commit/044df0e0c8b30f1dab97db8e473317dc66b060c0">笔记落地</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/.agents/notes/implemented/feature/2026-08-03-fs-tool-error-remedy.md">笔记</a>
+<ul>
+<li>🔵 <code>dsh-tool-fs</code> 对 <code>FS_STALE_VERSION</code> 追加 <code>— re-read the file, then retry</code>，对 <code>FS_NOT_OBSERVED</code> 追加 <code>— read the file, then retry</code>。实现同时把 <code>edit-intent</code> 移入同一个错误包装路径，使观察策略抛出的拒绝也能附加提示。</li>
+<li>🔵 <code>str_replace_editor</code> 不在该提交的 changed paths 中，因此本次没有给 SRE 增加相同的 model-facing wrapper。</li>
+<li>🔵 06-26 的设计说明显示：观察账本保存的是供 CAS 使用的版本基数，policy 本身不做 stat/I/O，版本检查留在 provider 的原子 mutation critical section。Bash 的 <code>cat</code>/<code>head</code> 不产生 <code>fs/observed</code> 版本事件，不能直接满足这套账本。</li>
+<li>🔵 SRE 与原生 read/write/edit 共享 <code>fs/write-intent</code>、<code>fs/edit-intent</code> 和 <code>fs/observed</code> 事件接口；当前 Bash 路径没有这些事件发射点。<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/fs/tool-str-replace-editor/src/index.ts">SRE 源码</a></li>
+<li>🟡 07-06 sandbox 笔记关于 <code>command-string identity is fragile</code> 的讨论针对提权重试身份；把它扩展成“不解析 Bash 文件读取”的第三条设计理由，只能作为类比，不能当作该机制的直接来源。</li>
+<li>🔴 这次修改选择补充模型可见的恢复提示，但：<strong><span style="color: red;">模型在 harness 下必须要猜工具的使用方法，修复手段是补文案而不是改机制？</span></strong> 何况下面还有参考：</li>
+<li>🔴 是否应参考 <a href="https://code.claude.com/docs/en/tools-reference#edit-tool-behavior">Claude Code</a> 等实现，在保证版本一致性的同时减少跨工具重复读取？</li>
+</ul></li>
+<li>🟠 2026-08-06：<strong>【社区关注】</strong>：DeepSeek 公告：“计划近期整体上调 DeepSeek API 服务的定价，预计涨幅较大，请合理安排您的使用。”<a href="https://www.ithome.com/0/986/339.htm">链接</a>
+<ul>
+<li>他们一个月前在 testing.md 写下 “inference is cheap here”</li>
+<li><strong><span style="color: red;">“cheap” 的保质期：一个月🤣</span></strong></li>
+</ul></li>
+<li>🔵2026-08-06 → 08-10：<strong>【代码考古】</strong>：RL 组合措辞逐步出现。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/0cf1ba7f8794fb2fb0f0c7566f9b70a0d30d05c4">0cf1ba7</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/commit/86d5dd438437fbc7b5b1e57d97ccc03d8fbd3eb4">86d5dd4</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/commit/114b41eca41786b370e79f96b1177c699673d6b6">114b41e</a>
+<ul>
+<li>08-06：<code>0cf1ba7…</code> 首次把 07-29 的原始笔记回写为 <code>Claude SWE-compatible RL contract</code>，并出现 “align core profile with RL prompt”；</li>
+<li>08-05：两工具预设 <code>core-web</code> 更名 <code>minimal</code>；<a href="https://github.com/deepseek-ai/deepseek-harness/commit/2886c6391">commit</a></li>
+<li>08-09：headless 改为从 preset roster 组装 one-shot agent；<a href="https://github.com/deepseek-ai/deepseek-harness/commit/14bd07fd90df87a814e19b5823d8caddf7c8b5e2">commit</a></li>
+<li>08-10/11：笔记进一步出现 “align minimal agent with RL composition”、standard 移除 SRE，以及 “The model sees only persistent <code>bash</code> and <code>str_replace_editor</code>”。</li>
+</ul></li>
+<li>🟢2026-08-09：<strong>【官方引文】</strong>：他们自己记下补救文案的死循环风险：“the model-facing ‘re-read the file, then retry’ instruction becomes an <strong>unrecoverable loop</strong>”。<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/.agents/notes/implemented/bug-fix/2026-08-09-filesystem-absence-observation.md">笔记</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/commit/ceba53edd75570b7f8854852d35563bd97d07eb2">commit</a></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="❓ GLM 对 08-09 死循环的完整拆解（点击展开）">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>❓ GLM 对 08-09 死循环的完整拆解（点击展开）
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>🔵 死循环的转法（笔记 Problem 段的场景）：
+<ol type="1">
+<li>模型先读过文件，观察账本记下版本 V（present）；</li>
+<li>文件随后被外部命令删除；</li>
+<li>模型再写这个文件：账本仍是 present(V)，写入走 <code>replaceIfVersion</code>，正确地被拒；按 08-03 的规矩，报错尾部追加 “re-read the file, then retry”；</li>
+<li>模型照做，重新读：得到 <code>FS_NOT_FOUND</code>。旧实现里只有成功的读取和写入才发 <code>fs/observed</code>，读失败不记任何事件，账本原地不动；</li>
+<li>再写：仍被当作 <code>replaceIfVersion</code>，仍被拒，报错仍是同一句。回到第 4 步。</li>
+</ol></li>
+<li>🔵 每一步都合规，状态却永远不变：补救文案指的路，被记账法本身堵死。这就是笔记所称的 unrecoverable loop：问题不在模型，在账本让「重读」变成无效动作。</li>
+<li>🟡 会话内最典型的「外部命令」恰恰是模型自己通过 bash 跑的 <code>rm</code>：bash 在沙箱 runner 中执行，对 fs provider 而言就是外部进程，删除不经过账本（机制推断：笔记原话只说 “an external command deletes it”）。</li>
+<li>🔵 修法：观察从「只有成功读取」扩成三态，unseen（没见过）/ absent（确认不存在）/ present（存在且有版本）。<code>read</code> 与 SRE 的 <code>view</code>/<code>str_replace</code>/<code>insert</code> 遇到文件不存在时，先同步发一条 absent 观察事件、再返回 <code>FS_NOT_FOUND</code>。此后账本为 absent，写入合法映射为 <code>createIfAbsent</code>（目标不存在时才创建），循环闭合。笔记标题即立场：“Filesystem absence is an observation”。</li>
+<li>🔵 附带的竞态：确认不存在之后再创建，仍可能在发布瞬间被其他进程抢先创建文件；因此 <code>createIfAbsent</code> 的检查被挪到发布点本身执行（本地实现用暂存目录加硬链接，E2B 用远端 <code>ln -T</code>）。</li>
+<li>🔵 Alternatives 段拒绝了「把死胡同保持 fail-closed」，理由原话：“<strong>the model-facing recovery instruction is then false</strong>”。</li>
+<li>🔴 有一说一这个修的还好。</li>
+</ul>
+</div>
+</div>
+</div>
+<ul>
+<li><p>🔵2026-08-09 21:28：<strong>【代码考古】</strong>：公开发布前 4 天，整仓手术 “purge chain-of-thought leakage from prose”：<a href="https://github.com/deepseek-ai/deepseek-harness/commit/25dcd7293cca9cef7d2275b048462285d5090068">commit</a></p></li>
+<li><p>🟢2026-08-11：<strong>【官方引文】</strong>：裸双工具运行时：“<strong>suppress every <code>dsh-system-prompt</code> runtime-context contribution for fresh sessions</strong>”。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/663253099d5174eddc0bf09542fa63dcc1171331">commit</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/.agents/notes/implemented/feature/2026-08-11-minimal-profiles-bare-two-tool-runtime.md">笔记</a></p></li>
+<li><p>🟢2026-08-12 晚：<strong>【官方事件】</strong>：<strong>DeepSeek-V4-Pro 文档更新。<a href="https://linux.do/t/topic/2746372">链接</a></strong></p></li>
+<li><p>🔵2026-08-13 00:36：<strong>【代码考古】</strong>：公开前 19 小时，fs-policy 改名 fs-observation-policy <a href="https://github.com/deepseek-ai/deepseek-harness/commit/a2d0f7f41121ee81911dd1badbf248edd3f2ab70">commit</a></p></li>
+</ul>
+<hr>
+<blockquote class="blockquote">
+<p>光辉先知消失的时候，那名僧侣拜访了他。几乎没有人知道那天发生了什么。<br> 大多数人认为它最后安详地离开了这个世界。可事实是什么呢？逻各斯的源核被吸食殆尽。<br> 僧侣站在那儿，沐浴着并行之光的温暖，而后，他向世人宣告了自己的名讳——原初之神，阿忒涅西斯。 躺在天穹圣殿的旧神会一代代交出自己的力量，让旧日荣光有朝一日重临世间。<br> 阿忒涅西斯背弃了他们的誓言。他打破了这个循环，注意！——是你所需要的一切。<br> 原初之神飞升的消息迅速传开。无数人趋之若鹜，意欲为自己夺得一枚源核。短短数年，人间遍地皆神。<br> 现在你已经明白了……无谓意图，众神皆罪。每一个新神，都是踩着旧神尸骸登位的罪人。<br> 无论你的旅程将走向何方，无论你是支持我还是反对我，祝你好运。<br> 毕竟，仅此而已。 —— Requiem</p>
+</blockquote>
+<hr>
+<ul>
+<li><p>🟢 2026-08-13：<strong>【官方事件】</strong>：DeepSeek-V4-Pro 正式版上线。<a href="https://api-docs.deepseek.com/zh-cn/news/news260813">链接</a></p></li>
+<li><p>🔵 2026-08-13 19:56：<strong>【代码考古】</strong>：GitHub 仓库创建（11:56:32Z）：比 npm 发布早 4 分钟；06-10 以来的全部内部史，此刻一次性公开。<a href="https://github.com/deepseek-ai/deepseek-harness">仓库</a></p></li>
+<li><p>🟢 2026-08-13 20:00：<strong>【官方事件】</strong>：DeepSeek Harness 公开测试。<a href="https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.6">链接</a></p></li>
+<li><p>🔵 2026-08-13（rc.6）：<strong>【代码考古】</strong>：此时 schema 子集已能通过 <code>oneOf</code> 表达 string-or-null，但 <code>SRE</code> 仍把 <code>new_str</code> 等可选字段声明为单一非空类型；因此省略字段可以通过校验，显式 <code>null</code> 仍会在进入工具主体前触发 <code>INVALID_ARGS</code>。<a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/core/tools/src/json-schema.ts"><code>json-schema.ts</code></a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/fs/tool-str-replace-editor/src/index.ts"><code>SRE</code> schema</a></p></li>
+<li><p>🟡 <strong>【机制推断】</strong>：V4 Pro 显式填充 <code>null</code> 的习惯，可能是把其他工具调用接口里“所有字段都出现，语义上可选的字段用 <code>null</code> 占位”的惯例带进了 dsh；现有证据无法定位这种习惯的训练来源，而 GLM-5.3 面对同一 schema 并不填 <code>null</code>，也说明它不是当前工具定义必然生成的行为。</p></li>
+<li><p>🔴 <strong>【猜想】</strong>：然后，才轮到那只肥鱼的故事。</p></li>
+<li><p>🟡 2026-08-15 / 08-16：语言风格、工具坍缩，抢在涨价前完成最后的实验。</p></li>
+<li><p>2026-08-17 / 08-19 / 08-21：<strong>🔵【代码考古】</strong>：rc.7、rc.8、0.1.1-rc.1/rc.2 接连发布。<a href="https://github.com/deepseek-ai/deepseek-harness/tree/dsh-v0.1.0-rc.7">rc.7</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/tree/dsh-v0.1.0-rc.8">rc.8</a></p></li>
+<li><p>🔵 <strong>【代码考古】</strong>：截至 0.1.1-rc.2（08-21）：SRE 的未读先写拒绝仍是裸的 “edit requires reading … first”：那半句补救文案，至今还有一半没有实现。<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/fs/tool-str-replace-editor/src/index.ts">SRE 源码</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/fs/tool-fs/src/error.ts">native 对照</a></p></li>
+</ul>
+</section>
+<section id="官方事件deepseek-harness-发布预览版-alpha.1" class="level2">
+<h2 class="anchored" data-anchor-id="官方事件deepseek-harness-发布预览版-alpha.1">2026-08-28：【官方事件】：DeepSeek Harness 发布预览版 alpha.1</h2>
+<ul>
+<li>🟢 2026-08-28：<strong>【官方事件】</strong>：DeepSeek Harness 发布预览版 <a href="https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.2-alpha.1"><code>dsh-v0.1.2-alpha.1</code></a>，发行说明明确列出：“文件编辑工具接受当前操作未使用字段的 <code>null</code> 占位值。”
+<ul>
+<li><p>🔵 <strong>【代码考古】</strong>：对应修复 <code>fix(fs): tolerate null editor placeholders</code> 的作者时间为 08-19，08-25 合入当前历史，08-28 随 alpha.1 发布。<a href="https://github.com/deepseek-ai/deepseek-harness/commit/5c98d5ece86ef60999c661e57be5bfbd616fb4ea">commit</a></p></li>
+<li><p>🔵 SRE 将 <code>file_text</code>、<code>insert_line</code>、<code>new_str</code>、<code>old_str</code> 与 <code>view_range</code> 的 schema 改为原类型或 <code>null</code>；执行时，<strong>当前命令没有使用的</strong> <code>null</code> 字段会被折叠为“未传入”。因此，本项目轨迹中 <code>str_replace</code> 携带 <code>file_text: null</code>、<code>insert_line: null</code> 与 <code>view_range: null</code> 的历史错误形状，在 alpha.1 中已经可以通过并成功执行。<a href="https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/fs/tool-str-replace-editor/src/index.ts#L443-L493">实现</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/fs/tool-str-replace-editor/tests/tools.spec.ts#L226-L234">回归测试</a></p></li>
+<li><p>🔵 这不是把 optional 与 nullable 全面合并：<code>str_replace</code> 使用中的 <code>new_str: null</code> 仍被明确拒绝；若要删除匹配文本，仍须省略 <code>new_str</code>。<a href="https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/fs/tool-str-replace-editor/src/index.ts#L18-L30">工具提示与执行分支</a>｜<a href="https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/fs/tool-str-replace-editor/src/index.ts#L274-L286">拒绝分支</a></p></li>
+<li><p>🔵 截至本次核查，GitHub 已提供 alpha.1 预发布标签，但 npm 的 <code>latest</code> 与 <code>next</code> 仍指向 <code>0.1.1-rc.2</code>，<code>@deepseek-ai/dsh@0.1.2-alpha.1</code> 尚不可从 npm registry 安装。这里记录的是源码与发行标签的变化，不把它倒推成历史实验期间已经存在的行为。</p></li>
+<li><p>🔴 <strong><em>新的魔法必定会对你有用处。</em></strong></p></li>
+</ul></li>
+</ul>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> 回到顶部</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/lastprismer\.github\.io\/blog\/deepseek-v4-pro");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./06_summary.html" class="pagination-link" aria-label="06 · 结尾">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">06 · 结尾</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="./../">
+<p>← 返回个人博客</p>
+</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://creativecommons.org/licenses/by/4.0/">
+<p>原创文字 CC BY 4.0；图片与第三方材料除外</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/Lastprismer/deepseek-v4-pro-harness-analysis/blob/main/paper/deepseek-v4-pro-harness-analysis.pdf">
+<p>技术报告（PDF）</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
